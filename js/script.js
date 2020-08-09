@@ -15,7 +15,13 @@ let buttonplay = document.querySelector(".play"),
     titiletrack = document.querySelectorAll(".titiletrack"),
     soundp = document.querySelectorAll(".soundp"),
     pausee = document.querySelectorAll(".pausee"),
-    namber = document.querySelectorAll(".namber");
+    namber = document.querySelectorAll(".namber"),
+    repeatimg = document.querySelector(".repeatimg"),
+    repeatred = document.querySelector(".repeatred"),
+    repeat = document.querySelector(".repeat"),
+    turn = document.querySelector(".turn"),
+    turnimg = document.querySelector(".turnimg"),
+    turnred = document.querySelector(".turnred");
 
 var song;
 var cover;
@@ -51,9 +57,15 @@ function initAudio(e) {
         rng.max =  song.duration;
         song.volume = volu.value;
         if(song.currentTime == song.duration){
-            initAudio(e+1);
-            playAudio();
-            n = e+1;
+            if(rep == false){
+                initAudio(e);
+                playAudio();
+                n = e;
+            }else{
+                initAudio(e+1);
+                playAudio();
+                n = e+1;
+            }
         }
 
         // update color name 
@@ -199,6 +211,30 @@ tracklist.addEventListener('click', function(event) {
                 }
             }
         }
+    }
+});
+
+//repeat
+var rep = true;
+repeat.addEventListener('click', function(){
+    if(repeatred.classList.contains("hidden")){
+        repeatimg.classList.add("hidden");
+        repeatred.classList.remove("hidden");
+        rep = false;
+    }else{
+        repeatred.classList.add("hidden");
+        repeatimg.classList.remove("hidden");
+        rep = true;
+    }
+});
+
+turn.addEventListener('click', function(){
+    if(turnred.classList.contains("hidden")){
+        turnimg.classList.add("hidden");
+        turnred.classList.remove("hidden");
+    }else{
+        turnred.classList.add("hidden");
+        turnimg.classList.remove("hidden");
     }
 });
 
